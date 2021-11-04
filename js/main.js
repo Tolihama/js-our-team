@@ -81,11 +81,18 @@ function cardPrinter(dataArray, domRef) {
 }
 
 function addMember() {
-    const member = {
-        name: nameInput.value.trim(),
-        role: roleInput.value.trim(),
-        image: imageInput.value.trim(),
-    };
-    cards.push(member);
-    cardPrinter(cards, cardContainer);
+    if ((nameInput.value === '') || (roleInput.value === '') || (imageInput.value === '')) {
+        alert('Completa tutti i campi!');
+    } else {
+        const member = {
+            name: nameInput.value.trim(),
+            role: roleInput.value.trim(),
+            image: imageInput.value.trim(),
+        };
+        cards.push(member);
+        cardPrinter(cards, cardContainer);
+        nameInput.value = '';
+        roleInput.value = '';
+        imageInput.value = '';
+    }
 }
