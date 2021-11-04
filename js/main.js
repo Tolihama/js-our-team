@@ -14,7 +14,7 @@ const imageInput = document.getElementById('image');
 
 const addMemberBtn = document.getElementById('addMemberButton');
 
-// 1. Creare Array di Oggetti per le card
+// DATA cards
 const cards = [
     {
         name: 'Wayne Barnett',
@@ -48,7 +48,16 @@ const cards = [
     },
 ];
 
-// 2a. Definizione funzione per stampare le card
+// Initial cards print
+cardPrinter(cards, cardContainer);
+
+// "Add Member Button" click event listener
+addMemberBtn.addEventListener('click', () => addMember());
+
+
+/**
+ * FUNCTIONS
+ */
 function cardPrinter(dataArray, domRef) {
     let outputToPrint = '';
     for (let i = 0; i < dataArray.length; i++) {
@@ -71,10 +80,6 @@ function cardPrinter(dataArray, domRef) {
     domRef.innerHTML = outputToPrint;
 }
 
-// 2b. Evocazione funzione per stampare le card già presenti nell'array di oggetti
-cardPrinter(cards, cardContainer);
-
-// 3a. Funzione per aggiungere nuove card tramite input dell'utente
 function addMember() {
     const member = {
         name: nameInput.value.trim(),
@@ -84,6 +89,3 @@ function addMember() {
     cards.push(member);
     cardPrinter(cards, cardContainer);
 }
-
-// 3b. "Add Member Button" click event listener
-addMemberBtn.addEventListener('click', () => addMember());
