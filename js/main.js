@@ -7,10 +7,12 @@
 // Card container
 const cardContainer = document.querySelector('.team-container');
 
-// "Add a new member" inputs refs
+// "Add a new member" refs
 const nameInput = document.getElementById('name');
 const roleInput = document.getElementById('role');
 const imageInput = document.getElementById('image');
+
+const addMemberBtn = document.getElementById('addMemberButton');
 
 // 1. Creare Array di Oggetti per le card
 const cards = [
@@ -48,9 +50,10 @@ const cards = [
 
 // 2a. Definizione funzione per stampare le card
 function cardPrinter(dataArray, domRef) {
+    let outputToPrint = '';
     for (let i = 0; i < dataArray.length; i++) {
         const data = dataArray[i];
-        domRef.innerHTML += `
+        outputToPrint += `
         <div class="team-card">
             <div class="card-image">
               <img
@@ -64,11 +67,23 @@ function cardPrinter(dataArray, domRef) {
             </div>
         </div>
         `;
-
     }
+    domRef.innerHTML = outputToPrint;
 }
 
 // 2b. Evocazione funzione per stampare le card già presenti nell'array di oggetti
 cardPrinter(cards, cardContainer);
 
-// 3. Funzione per aggiungere nuove card tramite input dell'utente
+// 3a. Funzione per aggiungere nuove card tramite input dell'utente
+function addMember() {
+    const member = {
+        name: nameInput.value.trim(),
+        role: roleInput.value.trim(),
+        image: imageInput.value.trim(),
+    };
+    cards.push(member);
+    cardPrinter(cards, cardContainer);
+}
+
+// 3b. "Add Member Button" click event listener
+addMemberBtn.addEventListener('click', () => addMember());
